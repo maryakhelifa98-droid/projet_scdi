@@ -1,0 +1,147 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StatCard from "../components/StatCard.astro";
+import InterpretationBox from "../components/InterpretationBox.astro";
+import CautionBox from "../components/CautionBox.astro";
+---
+
+<Layout title="Étude" description="Résultats de l'analyse descriptive : profils par poste, comparaison entre confédérations, valeur marchande vs performance.">
+  <section class="bg-navy-950 text-white">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 py-14 md:py-18">
+      <p class="text-xs font-semibold tracking-widest uppercase text-accent-teal-light mb-3">Résultats — grand public</p>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">L'étude des profils de performance</h1>
+      <p class="text-navy-100/90 text-lg leading-relaxed">
+        Que disent les statistiques sur les joueurs de ce dataset ? Voici les résultats de l'analyse descriptive,
+        expliqués simplement — avec, à chaque fois, ce qu'ils signifient vraiment et leurs limites.
+      </p>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 py-12 prose-section">
+
+    <!-- Distributions -->
+    <h2 id="distributions">Des statistiques très inégalement réparties</h2>
+    <p>
+      Buts marqués, minutes jouées, valeur marchande : la plupart des joueurs affichent des valeurs modestes,
+      tandis qu'une petite minorité de « stars » tire les chiffres vers le haut. On dit que ces distributions
+      sont <strong>asymétriques</strong> (skewed) : une longue traîne de valeurs élevées mais rares.
+    </p>
+
+    <figure class="my-8">
+      <img src="/img/charts/distribution-asymetrique-schema.svg" alt="Schéma d'une distribution asymétrique typique : beaucoup de valeurs faibles, une longue traîne de valeurs élevées et rares." class="w-full rounded-lg border border-slate-200" width="600" height="260" loading="lazy" />
+      <figcaption class="text-xs text-slate-500 mt-2 text-center">
+        Illustration schématique de la forme de distribution observée pour plusieurs statistiques (buts, valeur marchande…).
+      </figcaption>
+    </figure>
+
+    <InterpretationBox>
+      <p>
+        Une distribution <strong>asymétrique</strong> signifie que la moyenne peut être trompeuse : quelques joueurs
+        exceptionnels tirent la moyenne vers le haut, alors que la majorité se situe plus bas. C'est pourquoi
+        on privilégie souvent la <strong>médiane</strong> (la valeur du milieu) pour décrire un joueur « typique ».
+      </p>
+    </InterpretationBox>
+
+    <!-- Profils par poste -->
+    <h2 id="postes">Des profils très différents selon le poste</h2>
+    <p>
+      Sans surprise, un gardien et un attaquant n'ont pas le même métier sur le terrain — et cela se voit
+      nettement dans les données. La contribution offensive (buts, tirs, passes décisives) et la contribution
+      défensive (tacles, interceptions) varient fortement selon le poste occupé.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4 my-6">
+      <StatCard value="p ≈ 1,5 × 10⁻⁷⁹" label="Test de Kruskal-Wallis par poste" detail="Différence statistiquement très significative entre postes" accent="teal" />
+      <StatCard value="4 profils" label="Gardien / Défenseur / Milieu / Attaquant" detail="Contribution offensive vs défensive nettement distincte" accent="navy" />
+    </div>
+
+    <InterpretationBox>
+      <p>
+        Le <strong>test de Kruskal-Wallis</strong> compare plusieurs groupes pour savoir si leurs distributions
+        diffèrent réellement, sans supposer que les données suivent une courbe « en cloche ». La <strong>p-value</strong> mesure la probabilité d'observer un tel écart si, en réalité, il n'y avait
+        aucune différence entre les postes. Ici, p ≈ 1,5 × 10⁻⁷⁹ est extrêmement proche de zéro : la différence
+        entre postes est quasiment certaine — ce qui est cohérent avec le bon sens footballistique.
+      </p>
+    </InterpretationBox>
+
+    <!-- Confédérations -->
+    <h2 id="confederations">Confédération d'origine : aucune différence significative</h2>
+    <p>
+      Autre question posée à l'étude : la confédération d'origine d'un joueur (UEFA, CONMEBOL, CONCACAF, CAF,
+      AFC, OFC) influence-t-elle son profil de performance ? Malgré des effectifs très déséquilibrés entre
+      confédérations, le test statistique ne détecte <strong>aucune différence significative</strong>.
+    </p>
+
+    <figure class="my-8">
+      <img src="/img/charts/confederations-effectifs.svg" alt="Diagramme en barres : UEFA représente 37% des joueurs, CONCACAF 12%." class="w-full rounded-lg border border-slate-200" width="600" height="260" loading="lazy" />
+      <figcaption class="text-xs text-slate-500 mt-2 text-center">
+        Exemple d'effectifs déséquilibrés entre confédérations (UEFA 37 % vs CONCACAF 12 %).
+      </figcaption>
+    </figure>
+
+    <StatCard value="p = 0,95" label="Test de Kruskal-Wallis par confédération" detail="Aucune différence significative entre confédérations" accent="red" />
+
+    <InterpretationBox title="Comment lire ce résultat ?">
+      <p>
+        Une p-value de <strong>0,95</strong> est très éloignée du seuil habituel de signification (0,05) : on ne
+        peut pas rejeter l'hypothèse selon laquelle les profils de performance sont similaires d'une
+        confédération à l'autre, malgré des effectifs très inégaux (37 % pour l'UEFA contre 12 % pour la CONCACAF).
+        Autrement dit, dans ce dataset, la confédération d'origine ne semble pas être un facteur déterminant
+        de la performance individuelle.
+      </p>
+    </InterpretationBox>
+
+    <!-- Valeur marchande -->
+    <h2 id="valeur-marchande">Valeur marchande vs performance réelle</h2>
+    <p>
+      La valeur marchande d'un joueur reflète-t-elle sa performance sur le terrain ? La corrélation est <strong>positive mais modérée</strong> : la valeur marchande seule n'explique qu'une partie limitée de la
+      performance réelle. En intégrant le poste et l'âge du joueur, le modèle explique nettement mieux les écarts observés.
+    </p>
+
+    <div class="grid sm:grid-cols-3 gap-4 my-6">
+      <StatCard value="r = 0,36" label="Corrélation de Pearson" accent="teal" />
+      <StatCard value="ρ = 0,36" label="Corrélation de Spearman" accent="teal" />
+      <StatCard value="R² = 13 %" label="Modèle univarié" detail="valeur marchande seule" accent="navy" />
+    </div>
+
+    <figure class="my-8">
+      <img src="/img/charts/r2-comparison.svg" alt="Comparaison du R² : 13% pour un modèle univarié (valeur marchande seule) contre 58,8% pour un modèle multiple incluant poste et âge." class="w-full rounded-lg border border-slate-200" width="600" height="260" loading="lazy" />
+      <figcaption class="text-xs text-slate-500 mt-2 text-center">
+        Le pouvoir explicatif du modèle passe de 13 % (valeur marchande seule) à 58,8 % en ajoutant le poste et l'âge.
+      </figcaption>
+    </figure>
+
+    <InterpretationBox>
+      <p>
+        Le <strong>coefficient de corrélation</strong> (r ou ρ) mesure l'intensité d'une relation entre deux
+        variables, entre -1 (relation négative parfaite) et +1 (relation positive parfaite). Ici, 0,36 indique
+        un lien réel mais modéré. Le <strong>R²</strong> indique quelle part de la variation de la performance
+        est « expliquée » par le modèle : 13 % pour la valeur marchande seule, contre 58,8 % en ajoutant le
+        poste et l'âge — ces deux variables apportent donc beaucoup plus d'information que la valeur marchande seule.
+      </p>
+    </InterpretationBox>
+
+    <!-- Gardiens -->
+    <h2 id="gardiens">Le cas particulier des gardiens</h2>
+    <p>
+      Les gardiens de but ont un profil statistique à part : leurs indicateurs clés ne sont pas les buts ou
+      les passes décisives, mais le <strong>pourcentage d'arrêts</strong> (save percentage) et les <strong>clean sheets</strong> (matchs sans encaisser de but). Ils sont naturellement isolés du reste des
+      postes dans l'analyse par profil.
+    </p>
+
+    <CautionBox title="Limite à garder en tête">
+      <p>
+        Dans ce dataset synthétique, le <strong>pourcentage d'arrêts moyen des gardiens</strong> se situe autour
+        de <strong>23 %</strong>, très en dessous des standards réels du football professionnel (généralement
+        65-75 %). C'est l'un des signes que les données sont simulées et non représentatives d'une vraie
+        compétition. Voir le détail en <a href="/methodologie" class="text-accent-red underline font-medium">page Méthodologie</a>.
+      </p>
+    </CautionBox>
+
+    <div class="mt-12 flex justify-end">
+      <a href="/classification" class="inline-flex items-center gap-2 text-accent-red font-semibold hover:underline">
+        Voir le modèle de classification du poste →
+      </a>
+    </div>
+  </div>
+</Layout>

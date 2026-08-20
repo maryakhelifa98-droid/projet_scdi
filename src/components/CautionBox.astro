@@ -1,0 +1,20 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "Point de vigilance" } = Astro.props;
+---
+
+<aside class="my-6 rounded-lg border border-accent-red/30 bg-accent-red/5 p-5">
+  <div class="flex items-center gap-2 mb-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-red shrink-0">
+      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    <p class="font-semibold text-navy-900 text-sm uppercase tracking-wide">{title}</p>
+  </div>
+  <div class="text-sm text-slate-700 leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0">
+    <slot />
+  </div>
+</aside>

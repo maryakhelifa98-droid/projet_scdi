@@ -1,0 +1,24 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  detail?: string;
+  accent?: "teal" | "red" | "navy";
+}
+
+const { value, label, detail, accent = "teal" } = Astro.props;
+
+const accentClasses = {
+  teal: "text-accent-teal border-accent-teal/30",
+  red: "text-accent-red border-accent-red/30",
+  navy: "text-navy-700 border-navy-700/30",
+};
+---
+
+<div class={`rounded-xl border bg-white shadow-sm p-5 ${accentClasses[accent]}`}>
+  <p class={`text-3xl md:text-4xl font-extrabold ${accentClasses[accent].split(" ")[0]}`}>
+    {value}
+  </p>
+  <p class="mt-1 text-sm font-semibold text-navy-900">{label}</p>
+  {detail && <p class="mt-1 text-xs text-slate-500 leading-snug">{detail}</p>}
+</div>

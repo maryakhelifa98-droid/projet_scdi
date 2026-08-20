@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Palette reprise du logo DATA WC26 : bleu marine profond + accent rouge terrain */
+  --color-navy-950: #0a1a33;
+  --color-navy-900: #0d2347;
+  --color-navy-800: #123162;
+  --color-navy-700: #1a3f7a;
+  --color-navy-600: #2c5a9e;
+  --color-navy-100: #dbe6f5;
+  --color-navy-50: #f2f6fc;
+
+  --color-accent-red: #e63946;
+  --color-accent-red-dark: #c22836;
+  --color-accent-teal: #2f8ca8;
+  --color-accent-teal-light: #5aa9c2;
+
+  --color-ink: #0d1b2a;
+  --color-paper: #f7f9fc;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.prose-section h2 {
+  @apply text-2xl md:text-3xl font-bold text-navy-900 mt-2 mb-4;
+}
+
+.prose-section h3 {
+  @apply text-xl font-semibold text-navy-800 mt-8 mb-3;
+}
+
+.prose-section p {
+  @apply text-base leading-relaxed text-slate-700 mb-4;
+}
+
+.prose-section ul {
+  @apply list-disc pl-6 mb-4 text-slate-700 space-y-1;
+}

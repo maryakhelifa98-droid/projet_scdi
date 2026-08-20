@@ -1,0 +1,26 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-navy-950 border-t border-navy-800 mt-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10">
+    <div class="rounded-lg border border-accent-red/30 bg-accent-red/10 px-4 py-3 mb-8">
+      <p class="text-sm text-navy-100 leading-relaxed">
+        <strong class="text-white">⚠ Rappel :</strong> les données utilisées dans cette étude sont <strong class="text-white">synthétiques / simulées</strong> (dataset Kaggle). Elles ne décrivent pas
+        la réelle Coupe du Monde FIFA 2026 — voir la page <a href="/methodologie" class="underline decoration-accent-red/60 hover:text-white">Méthodologie</a>.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <img src="/img/brand/icon.svg" alt="" width="28" height="28" class="rounded-full" />
+        <span class="text-navy-100 text-sm">
+          <span class="font-semibold text-white">DATA WC26</span> — Étude de performance des joueurs (projet pédagogique)
+        </span>
+      </div>
+      <p class="text-navy-100/60 text-xs">
+        © {year} — Réalisé avec Python (pandas, seaborn, statsmodels, scikit-learn) &amp; Astro
+      </p>
+    </div>
+  </div>
+</footer>

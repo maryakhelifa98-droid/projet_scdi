@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="À propos" description="Auteur, source du dataset et outils utilisés pour ce projet d'étude de data science.">
+  <section class="bg-navy-950 text-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 py-14 md:py-18">
+      <p class="text-xs font-semibold tracking-widest uppercase text-accent-teal-light mb-3">À propos</p>
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Le projet DATA WC26</h1>
+      <p class="text-navy-100/90 text-lg leading-relaxed">
+        Un projet pédagogique de data science autour de la performance des joueurs de football.
+      </p>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 py-12 prose-section">
+
+    <h2>Auteur</h2>
+    <p>
+      Étude réalisée dans le cadre d'un projet pédagogique de data science.
+      <!-- TODO : remplacer par le nom souhaité pour l'attribution publique du projet -->
+    </p>
+
+    <h2>Source des données</h2>
+    <p>
+      Le jeu de données utilisé, <em>FIFA World Cup 2026 Player Performance</em>, est disponible sur Kaggle.
+      Il s'agit d'un dataset <strong>synthétique</strong> — voir la page <a href="/methodologie" class="text-accent-red underline font-medium">Méthodologie</a> pour le détail des limites.
+    </p>
+    <p class="text-sm text-slate-500">
+      <!-- TODO : ajouter le lien Kaggle exact du dataset -->
+      Lien Kaggle du dataset à ajouter.
+    </p>
+
+    <h2>Outils utilisés</h2>
+    <ul>
+      <li>Python — pandas, seaborn, matplotlib, statsmodels, scikit-learn</li>
+      <li>Jupyter Notebook pour l'analyse et la modélisation</li>
+      <li>Astro &amp; Tailwind CSS pour ce site</li>
+    </ul>
+
+    <h2>Code source</h2>
+    <p class="text-sm text-slate-500">
+      <!-- TODO : ajouter le lien GitHub vers les notebooks / le code du projet -->
+      Lien vers le dépôt GitHub des notebooks à ajouter.
+    </p>
+
+    <div class="mt-12">
+      <a href="/" class="inline-flex items-center gap-2 text-navy-700 font-semibold hover:underline">
+        ← Retour à l'accueil
+      </a>
+    </div>
+  </div>
+</Layout>

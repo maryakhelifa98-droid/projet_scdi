@@ -1,0 +1,107 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StatCard from "../components/StatCard.astro";
+---
+
+<Layout title="Accueil" description="Étude data science sur la performance des joueurs de la Coupe du Monde FIFA 2026 — dataset Kaggle synthétique.">
+  <!-- Hero -->
+  <section class="bg-navy-950 text-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-teal-light bg-navy-800 rounded-full px-3 py-1 mb-5">
+          Projet pédagogique de data science
+        </p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-5">
+          La performance des joueurs de la Coupe du Monde 2026, décryptée par la donnée
+        </h1>
+        <p class="text-navy-100/90 text-lg leading-relaxed mb-8">
+          Les profils de performance varient-ils selon le <strong class="text-white">poste</strong>, la <strong class="text-white">confédération d'origine</strong> et la <strong class="text-white">valeur marchande</strong> des joueurs ? Une étude menée en Python
+          (pandas, seaborn, statsmodels, scikit-learn) sur un dataset Kaggle.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/etude" class="inline-flex items-center gap-2 bg-accent-red hover:bg-accent-red-dark transition-colors text-white font-semibold px-5 py-3 rounded-lg">
+            Découvrir les résultats
+          </a>
+          <a href="/methodologie" class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 transition-colors text-white font-semibold px-5 py-3 rounded-lg">
+            Voir la méthodologie
+          </a>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <img src="/img/brand/logo-full.svg" alt="Logo DATA WC26 — Étude de performance" width="340" height="340" class="w-64 sm:w-80 md:w-full max-w-sm drop-shadow-2xl" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Alerte dataset synthétique -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 -mt-8 md:-mt-10 relative z-10">
+    <div class="bg-white border border-accent-red/30 rounded-xl shadow-md px-5 py-4 flex gap-3 items-start">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e63946" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <p class="text-sm text-slate-700 leading-relaxed">
+        <strong class="text-navy-900">Dataset synthétique :</strong> ces données sont simulées à des fins pédagogiques,
+        elles ne représentent pas les vraies statistiques de la Coupe du Monde FIFA 2026.
+        Les résultats sont à lire comme une <strong>illustration méthodologique</strong>. Détails en <a href="/methodologie" class="text-accent-red font-medium underline">page Méthodologie</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contexte -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-20">
+    <div class="max-w-3xl">
+      <h2 class="text-2xl md:text-3xl font-bold text-navy-900 mb-4">Le contexte</h2>
+      <p class="text-slate-700 leading-relaxed mb-4">
+        Ce site présente les résultats d'une étude réalisée à partir du jeu de données <em>FIFA World Cup 2026 Player Performance</em>, disponible sur Kaggle. Il recense des
+        statistiques de jeu détaillées (buts, passes, tacles, minutes jouées, valeur marchande…) pour
+        des joueurs répartis par poste et par confédération.
+      </p>
+      <p class="text-slate-700 leading-relaxed">
+        L'analyse s'appuie sur trois notebooks Jupyter : un nettoyage et contrôle qualité des données,
+        une analyse descriptive avec tests statistiques, puis une classification du poste des joueurs
+        par régression logistique. L'objectif : répondre à une question simple avec des méthodes rigoureuses,
+        et rester honnête sur les limites du jeu de données.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4 mt-10">
+      <StatCard value="1 248" label="Joueurs analysés" detail="75 colonnes, aucune valeur manquante" accent="navy" />
+      <StatCard value="4" label="Postes étudiés" detail="Gardien, Défenseur, Milieu, Attaquant" accent="teal" />
+      <StatCard value="6" label="Confédérations" detail="UEFA, CONMEBOL, CONCACAF, CAF, AFC, OFC" accent="red" />
+    </div>
+  </section>
+
+  <!-- Aperçu des sections -->
+  <section class="bg-navy-50 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-navy-900 mb-10 text-center">Explorer l'étude</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/etude" class="group bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          <p class="text-xs font-semibold uppercase tracking-wide text-accent-teal mb-2">Résultats</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Étude descriptive</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Profils par poste, comparaison entre confédérations, lien entre valeur marchande et performance réelle.
+          </p>
+          <span class="inline-block mt-4 text-sm font-semibold text-accent-red group-hover:underline">Voir les résultats →</span>
+        </a>
+        <a href="/classification" class="group bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          <p class="text-xs font-semibold uppercase tracking-wide text-accent-teal mb-2">Machine learning</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Classification du poste</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Un modèle prédit le poste d'un joueur à partir de ses statistiques — avec un résultat presque trop parfait.
+          </p>
+          <span class="inline-block mt-4 text-sm font-semibold text-accent-red group-hover:underline">Voir le modèle →</span>
+        </a>
+        <a href="/methodologie" class="group bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          <p class="text-xs font-semibold uppercase tracking-wide text-accent-teal mb-2">Technique</p>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Méthodologie</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Nettoyage des données, choix méthodologiques et limites — dont la nature synthétique du dataset.
+          </p>
+          <span class="inline-block mt-4 text-sm font-semibold text-accent-red group-hover:underline">Comprendre la démarche →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

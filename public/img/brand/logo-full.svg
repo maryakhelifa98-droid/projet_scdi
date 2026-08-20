@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">DATA WC26 — Étude de performance</title>
+  <defs>
+    <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1d5c78"/>
+      <stop offset="100%" stop-color="#5aa9c2"/>
+    </linearGradient>
+    <radialGradient id="bgGrad" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#123162"/>
+      <stop offset="100%" stop-color="#0a1a33"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="248" fill="url(#bgGrad)" stroke="#2f8ca8" stroke-width="10"/>
+  <circle cx="256" cy="256" r="205" fill="none" stroke="#1a3f7a" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Ballon -->
+  <g transform="translate(256,192)">
+    <circle r="52" fill="#f4f6f9"/>
+    <path d="M0 -30 L18 -12 L12 12 L-12 12 L-18 -12 Z" fill="#0d1b2a"/>
+    <path d="M0 -30 L0 -52 M18 -12 L38 -20 M12 12 L28 30 M-12 12 L-28 30 M-18 -12 L-38 -20"
+      stroke="#0d1b2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle r="52" fill="none" stroke="#c9d3e0" stroke-width="1.5"/>
+  </g>
+
+  <!-- Barres -->
+  <g transform="translate(256,208)">
+    <rect x="-96" y="112" width="26" height="56" rx="3" fill="url(#barGrad)"/>
+    <rect x="-58" y="92"  width="26" height="76" rx="3" fill="url(#barGrad)"/>
+    <rect x="-20" y="60"  width="26" height="108" rx="3" fill="url(#barGrad)"/>
+    <rect x="18"  y="86"  width="26" height="82" rx="3" fill="url(#barGrad)"/>
+    <rect x="56"  y="106" width="26" height="62" rx="3" fill="url(#barGrad)"/>
+
+    <!-- Ligne de tendance rouge -->
+    <polyline points="-83,60 -45,44 -7,24 31,50 69,72"
+      fill="none" stroke="#e63946" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="-7" cy="24" r="7" fill="#e63946"/>
+  </g>
+
+  <!-- Texte -->
+  <text x="256" y="398" text-anchor="middle" font-family="'Inter', ui-sans-serif, system-ui, sans-serif"
+    font-size="40" font-weight="800" fill="#f7f9fc" letter-spacing="1">DATA WC26</text>
+  <text x="256" y="428" text-anchor="middle" font-family="'Inter', ui-sans-serif, system-ui, sans-serif"
+    font-size="15" font-weight="600" fill="#8fb3d9" letter-spacing="3">ÉTUDE DE PERFORMANCE</text>
+</svg>
