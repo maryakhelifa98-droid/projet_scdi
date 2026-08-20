@@ -50,9 +50,9 @@ import CautionBox from "../components/CautionBox.astro";
     </p>
 
     <figure class="my-8">
-      <img src="/img/charts/confusion-matrix-schema.svg" alt="Schéma d'une matrice de confusion 4x4 parfaitement diagonale : 100% de bonnes classifications pour Gardien, Défenseur, Milieu et Attaquant, aucune confusion hors diagonale." class="w-full max-w-md mx-auto rounded-lg border border-slate-200" width="480" height="420" loading="lazy" />
+      <img src="/img/charts/confusion-matrix.png" alt="Matrice de confusion réelle 4x4 sur l'ensemble de test (312 joueurs) : 36 gardiens, 108 défenseurs, 96 milieux, 72 attaquants, tous classés correctement. Aucune valeur hors diagonale." class="w-full max-w-md mx-auto rounded-lg border border-slate-200" loading="lazy" />
       <figcaption class="text-xs text-slate-500 mt-2 text-center">
-        Schéma illustrant la diagonale parfaite obtenue (pas les valeurs numériques exactes du notebook).
+        Matrice de confusion réelle sur l'ensemble de test (312 joueurs) — diagonale parfaite.
       </figcaption>
     </figure>
 
@@ -72,10 +72,18 @@ import CautionBox from "../components/CautionBox.astro";
       interprétables et cohérents avec la logique du jeu :
     </p>
     <ul>
-      <li><strong>Tacles et interceptions</strong> pèsent fortement en faveur de la classe « Défenseur ».</li>
-      <li><strong>Buts et tirs</strong> pèsent fortement en faveur de la classe « Attaquant ».</li>
-      <li>Les statistiques de passes et de couverture de terrain orientent vers la classe « Milieu ».</li>
+      <li><strong>Tacles, interceptions et dégagements</strong> pèsent fortement en faveur de la classe « Défenseur ».</li>
+      <li><strong>Tirs, dribbles tentés et buts</strong> pèsent fortement en faveur de la classe « Attaquant ».</li>
+      <li><strong>Précision de passe et centres</strong> orientent vers la classe « Milieu ».</li>
     </ul>
+
+    <figure class="my-8">
+      <img src="/img/charts/coefficients-par-poste.png" alt="Quatre graphiques en barres horizontales montrant les coefficients du modèle par poste : dégagements et tacles dominent pour Défenseur, tirs et dribbles pour Attaquant, précision de passe et centres pour Milieu, précision de passe (en négatif) et tirs (en négatif) pour Gardien." class="w-full rounded-lg border border-slate-200" loading="lazy" />
+      <figcaption class="text-xs text-slate-500 mt-2 text-center">
+        Coefficients du modèle de régression logistique, par poste — plus la barre est longue, plus la variable pèse dans la prédiction.
+      </figcaption>
+    </figure>
+
     <p>
       C'est un point rassurant : même si l'accuracy parfaite doit être questionnée, le modèle n'apprend pas
       n'importe quoi — il retrouve une structure statistique cohérente avec le rôle réel de chaque poste sur le terrain.

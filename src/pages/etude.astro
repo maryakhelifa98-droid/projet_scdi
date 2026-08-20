@@ -28,9 +28,9 @@ import CautionBox from "../components/CautionBox.astro";
     </p>
 
     <figure class="my-8">
-      <img src="/img/charts/distribution-asymetrique-schema.svg" alt="Schéma d'une distribution asymétrique typique : beaucoup de valeurs faibles, une longue traîne de valeurs élevées et rares." class="w-full rounded-lg border border-slate-200" width="600" height="260" loading="lazy" />
+      <img src="/img/charts/distribution-buts.png" alt="Quatre histogrammes : distribution des buts, des minutes jouées, de la note moyenne et de la valeur marchande (échelle log10), tous asymétriques vers la droite sauf les minutes jouées." class="w-full rounded-lg border border-slate-200" loading="lazy" />
       <figcaption class="text-xs text-slate-500 mt-2 text-center">
-        Illustration schématique de la forme de distribution observée pour plusieurs statistiques (buts, valeur marchande…).
+        Distributions réelles extraites du notebook d'analyse descriptive (buts, minutes jouées, note moyenne, valeur marchande).
       </figcaption>
     </figure>
 
@@ -50,6 +50,13 @@ import CautionBox from "../components/CautionBox.astro";
       défensive (tacles, interceptions) varient fortement selon le poste occupé.
     </p>
 
+    <figure class="my-8">
+      <img src="/img/charts/profils-poste-offensif-defensif.png" alt="Diagramme en barres : contribution offensive et défensive moyenne par poste. Les attaquants dominent en contribution offensive (65,4) et sont les plus faibles en défense (24,9) ; l'inverse pour les défenseurs (32,2 en attaque, 67,3 en défense)." class="w-full max-w-xl mx-auto rounded-lg border border-slate-200" loading="lazy" />
+      <figcaption class="text-xs text-slate-500 mt-2 text-center">
+        Contribution offensive vs défensive moyenne par poste (données réelles du notebook d'analyse descriptive).
+      </figcaption>
+    </figure>
+
     <div class="grid sm:grid-cols-2 gap-4 my-6">
       <StatCard value="p ≈ 1,5 × 10⁻⁷⁹" label="Test de Kruskal-Wallis par poste" detail="Différence statistiquement très significative entre postes" accent="teal" />
       <StatCard value="4 profils" label="Gardien / Défenseur / Milieu / Attaquant" detail="Contribution offensive vs défensive nettement distincte" accent="navy" />
@@ -67,15 +74,16 @@ import CautionBox from "../components/CautionBox.astro";
     <!-- Confédérations -->
     <h2 id="confederations">Confédération d'origine : aucune différence significative</h2>
     <p>
-      Autre question posée à l'étude : la confédération d'origine d'un joueur (UEFA, CONMEBOL, CONCACAF, CAF,
-      AFC, OFC) influence-t-elle son profil de performance ? Malgré des effectifs très déséquilibrés entre
-      confédérations, le test statistique ne détecte <strong>aucune différence significative</strong>.
+      Autre question posée à l'étude : la confédération d'origine d'un joueur (UEFA, CAF, AFC, CONMEBOL,
+      CONCACAF — les 5 confédérations représentées dans ce dataset) influence-t-elle son profil de
+      performance ? Malgré des effectifs très déséquilibrés entre confédérations, le test statistique ne
+      détecte <strong>aucune différence significative</strong>.
     </p>
 
     <figure class="my-8">
-      <img src="/img/charts/confederations-effectifs.svg" alt="Diagramme en barres : UEFA représente 37% des joueurs, CONCACAF 12%." class="w-full rounded-lg border border-slate-200" width="600" height="260" loading="lazy" />
+      <img src="/img/charts/performance-par-confederation.png" alt="Boxplots du score de performance par confédération (UEFA, CAF, AFC, CONMEBOL, CONCACAF) : les cinq distributions se superposent presque parfaitement, sans différence visible." class="w-full rounded-lg border border-slate-200" loading="lazy" />
       <figcaption class="text-xs text-slate-500 mt-2 text-center">
-        Exemple d'effectifs déséquilibrés entre confédérations (UEFA 37 % vs CONCACAF 12 %).
+        Score de performance par confédération : des distributions quasiment superposées, cohérentes avec l'absence de différence significative.
       </figcaption>
     </figure>
 
@@ -105,7 +113,14 @@ import CautionBox from "../components/CautionBox.astro";
     </div>
 
     <figure class="my-8">
-      <img src="/img/charts/r2-comparison.svg" alt="Comparaison du R² : 13% pour un modèle univarié (valeur marchande seule) contre 58,8% pour un modèle multiple incluant poste et âge." class="w-full rounded-lg border border-slate-200" width="600" height="260" loading="lazy" />
+      <img src="/img/charts/valeur-marchande-vs-performance.png" alt="Nuage de points : valeur marchande (échelle log) en abscisse, score de performance en ordonnée, coloré par poste. Une tendance positive est visible mais avec beaucoup de dispersion, notamment chez les gardiens (en bleu, valeurs de performance plus basses)." class="w-full rounded-lg border border-slate-200" loading="lazy" />
+      <figcaption class="text-xs text-slate-500 mt-2 text-center">
+        Valeur marchande vs score de performance, par poste — une tendance positive, mais avec une dispersion importante.
+      </figcaption>
+    </figure>
+
+    <figure class="my-8 max-w-md mx-auto">
+      <img src="/img/charts/r2-comparison.svg" alt="Comparaison du R² : 13% pour un modèle univarié (valeur marchande seule) contre 58,8% pour un modèle multiple incluant poste et âge." class="w-full rounded-lg border border-slate-200" loading="lazy" />
       <figcaption class="text-xs text-slate-500 mt-2 text-center">
         Le pouvoir explicatif du modèle passe de 13 % (valeur marchande seule) à 58,8 % en ajoutant le poste et l'âge.
       </figcaption>
