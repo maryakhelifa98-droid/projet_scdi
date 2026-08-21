@@ -1,18 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import StatCard from "../components/StatCard.astro";
-import InterpretationBox from "../components/InterpretationBox.astro";
-import CautionBox from "../components/CautionBox.astro";
 ---
 
 <Layout title="Étude" description="Résultats de l'analyse descriptive : profils par poste, comparaison entre confédérations, valeur marchande vs performance.">
   <section class="bg-navy-950 text-white">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 py-14 md:py-18">
-      <p class="text-xs font-semibold tracking-widest uppercase text-accent-teal-light mb-3">Résultats — grand public</p>
       <h1 class="text-3xl md:text-4xl font-extrabold mb-4">L'étude des profils de performance</h1>
       <p class="text-navy-100/90 text-lg leading-relaxed">
-        Que disent les statistiques sur les joueurs de ce dataset ? Voici les résultats de l'analyse descriptive,
-        expliqués simplement — avec, à chaque fois, ce qu'ils signifient vraiment et leurs limites.
+        Que disent les statistiques sur les joueurs de ce dataset ? Voici les résultats de l'analyse descriptive
       </p>
     </div>
   </section>
@@ -21,11 +17,12 @@ import CautionBox from "../components/CautionBox.astro";
 
     <!-- Distributions -->
     <h2 id="distributions">Des statistiques très inégalement réparties</h2>
-    <p>
-      Buts marqués, minutes jouées, valeur marchande : la plupart des joueurs affichent des valeurs modestes,
-      tandis qu'une petite minorité de « stars » tire les chiffres vers le haut. On dit que ces distributions
-      sont <strong>asymétriques</strong> (skewed) : une longue traîne de valeurs élevées mais rares.
-    </p>
+    <ul>
+      <li><strong>Buts marqués</strong> : la majorité des joueurs présentent de faibles valeurs, avec quelques joueurs affichant des performances nettement plus élevées.</li>
+      <li><strong>Minutes jouées</strong> : les temps de jeu sont assez dispersés, avec des écarts importants entre les joueurs.</li>
+      <li><strong>Valeur marchande</strong> : les valeurs sont très hétérogènes, avec quelques joueurs présentant des montants particulièrement élevés.</li>
+      <li><strong>À retenir</strong> : les trois variables sont asymétriques à droite, avec une longue traîne correspondant aux valeurs les plus élevées.</li>
+    </ul>
 
     <figure class="my-8">
       <img src="/img/charts/distribution-buts.png" alt="Quatre histogrammes : distribution des buts, des minutes jouées, de la note moyenne et de la valeur marchande (échelle log10), tous asymétriques vers la droite sauf les minutes jouées." class="w-full rounded-lg border border-slate-200" loading="lazy" />
@@ -34,20 +31,12 @@ import CautionBox from "../components/CautionBox.astro";
       </figcaption>
     </figure>
 
-    <InterpretationBox>
-      <p>
-        Une distribution <strong>asymétrique</strong> signifie que la moyenne peut être trompeuse : quelques joueurs
-        exceptionnels tirent la moyenne vers le haut, alors que la majorité se situe plus bas. C'est pourquoi
-        on privilégie souvent la <strong>médiane</strong> (la valeur du milieu) pour décrire un joueur « typique ».
-      </p>
-    </InterpretationBox>
-
     <!-- Profils par poste -->
     <h2 id="postes">Des profils très différents selon le poste</h2>
     <p>
-      Sans surprise, un gardien et un attaquant n'ont pas le même métier sur le terrain — et cela se voit
-      nettement dans les données. La contribution offensive (buts, tirs, passes décisives) et la contribution
-      défensive (tacles, interceptions) varient fortement selon le poste occupé.
+      <strong>Impact du poste</strong> : les statistiques des joueurs varient nettement selon leur position. Les
+      indicateurs offensifs (buts, tirs, passes décisives) sont davantage associés aux attaquants, tandis que les
+      indicateurs défensifs (tacles, interceptions) caractérisent davantage les défenseurs et les milieux.
     </p>
 
     <figure class="my-8">
@@ -62,14 +51,57 @@ import CautionBox from "../components/CautionBox.astro";
       <StatCard value="4 profils" label="Gardien / Défenseur / Milieu / Attaquant" detail="Contribution offensive vs défensive nettement distincte" accent="navy" />
     </div>
 
-    <InterpretationBox>
-      <p>
-        Le <strong>test de Kruskal-Wallis</strong> compare plusieurs groupes pour savoir si leurs distributions
-        diffèrent réellement, sans supposer que les données suivent une courbe « en cloche ». La <strong>p-value</strong> mesure la probabilité d'observer un tel écart si, en réalité, il n'y avait
-        aucune différence entre les postes. Ici, p ≈ 1,5 × 10⁻⁷⁹ est extrêmement proche de zéro : la différence
-        entre postes est quasiment certaine — ce qui est cohérent avec le bon sens footballistique.
-      </p>
-    </InterpretationBox>
+    <h3>Pourquoi Kruskal-Wallis plutôt qu'une ANOVA classique ?</h3>
+    <p>
+      Avant de choisir le test, on vérifie les deux conditions requises par l'ANOVA classique : la
+      <strong>normalité</strong> de la variable dans chaque groupe (test de Shapiro-Wilk) et l'<strong>homogénéité
+      des variances</strong> entre groupes (test de Levene).
+    </p>
+
+    <div class="overflow-x-auto my-6 rounded-lg border border-slate-200">
+      <table class="w-full text-sm text-left">
+        <thead class="bg-navy-900 text-white">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Poste</th>
+            <th class="px-4 py-3 font-semibold">n</th>
+            <th class="px-4 py-3 font-semibold">Shapiro-Wilk (normalité)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 bg-white">
+          <tr>
+            <td class="px-4 py-3 font-medium text-navy-900">Gardien</td>
+            <td class="px-4 py-3">144</td>
+            <td class="px-4 py-3">W = 0,976 ; p = 0,0135 → non normal</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-navy-900">Défenseur</td>
+            <td class="px-4 py-3">432</td>
+            <td class="px-4 py-3">W = 0,986 ; p = 0,0003 → non normal</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-navy-900">Milieu</td>
+            <td class="px-4 py-3">384</td>
+            <td class="px-4 py-3">W = 0,995 ; p = 0,294 → normal</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-navy-900">Attaquant</td>
+            <td class="px-4 py-3">288</td>
+            <td class="px-4 py-3">W = 0,992 ; p = 0,143 → normal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Test de Levene (homogénéité des variances entre postes) : W = 4,330 ; p = 0,0048 →
+      <strong>variances inégales</strong>.
+    </p>
+    <p>
+      Les scores de performance des gardiens et des défenseurs ne suivent pas une distribution normale, et les
+      variances diffèrent significativement entre postes : les deux conditions de l'ANOVA classique sont donc
+      violées. Le test de <strong>Kruskal-Wallis</strong>, qui ne suppose ni normalité ni égalité des variances,
+      est le choix statistiquement justifié pour comparer les postes.
+    </p>
 
     <!-- Confédérations -->
     <h2 id="confederations">Confédération d'origine : aucune différence significative</h2>
@@ -89,21 +121,13 @@ import CautionBox from "../components/CautionBox.astro";
 
     <StatCard value="p = 0,95" label="Test de Kruskal-Wallis par confédération" detail="Aucune différence significative entre confédérations" accent="red" />
 
-    <InterpretationBox title="Comment lire ce résultat ?">
-      <p>
-        Une p-value de <strong>0,95</strong> est très éloignée du seuil habituel de signification (0,05) : on ne
-        peut pas rejeter l'hypothèse selon laquelle les profils de performance sont similaires d'une
-        confédération à l'autre, malgré des effectifs très inégaux (37 % pour l'UEFA contre 12 % pour la CONCACAF).
-        Autrement dit, dans ce dataset, la confédération d'origine ne semble pas être un facteur déterminant
-        de la performance individuelle.
-      </p>
-    </InterpretationBox>
-
     <!-- Valeur marchande -->
     <h2 id="valeur-marchande">Valeur marchande vs performance réelle</h2>
     <p>
-      La valeur marchande d'un joueur reflète-t-elle sa performance sur le terrain ? La corrélation est <strong>positive mais modérée</strong> : la valeur marchande seule n'explique qu'une partie limitée de la
-      performance réelle. En intégrant le poste et l'âge du joueur, le modèle explique nettement mieux les écarts observés.
+      <strong>Valeur marchande et performance</strong> : la corrélation entre la valeur marchande et la
+      performance est positive mais modérée. La valeur marchande ne suffit donc pas à expliquer les
+      différences de performance entre les joueurs. La prise en compte du poste et de l'âge permet d'obtenir
+      une meilleure explication des écarts observés.
     </p>
 
     <div class="grid sm:grid-cols-3 gap-4 my-6">
@@ -125,33 +149,6 @@ import CautionBox from "../components/CautionBox.astro";
         Le pouvoir explicatif du modèle passe de 13 % (valeur marchande seule) à 58,8 % en ajoutant le poste et l'âge.
       </figcaption>
     </figure>
-
-    <InterpretationBox>
-      <p>
-        Le <strong>coefficient de corrélation</strong> (r ou ρ) mesure l'intensité d'une relation entre deux
-        variables, entre -1 (relation négative parfaite) et +1 (relation positive parfaite). Ici, 0,36 indique
-        un lien réel mais modéré. Le <strong>R²</strong> indique quelle part de la variation de la performance
-        est « expliquée » par le modèle : 13 % pour la valeur marchande seule, contre 58,8 % en ajoutant le
-        poste et l'âge — ces deux variables apportent donc beaucoup plus d'information que la valeur marchande seule.
-      </p>
-    </InterpretationBox>
-
-    <!-- Gardiens -->
-    <h2 id="gardiens">Le cas particulier des gardiens</h2>
-    <p>
-      Les gardiens de but ont un profil statistique à part : leurs indicateurs clés ne sont pas les buts ou
-      les passes décisives, mais le <strong>pourcentage d'arrêts</strong> (save percentage) et les <strong>clean sheets</strong> (matchs sans encaisser de but). Ils sont naturellement isolés du reste des
-      postes dans l'analyse par profil.
-    </p>
-
-    <CautionBox title="Limite à garder en tête">
-      <p>
-        Dans ce dataset synthétique, le <strong>pourcentage d'arrêts moyen des gardiens</strong> se situe autour
-        de <strong>23 %</strong>, très en dessous des standards réels du football professionnel (généralement
-        65-75 %). C'est l'un des signes que les données sont simulées et non représentatives d'une vraie
-        compétition. Voir le détail en <a href="/methodologie" class="text-accent-red underline font-medium">page Méthodologie</a>.
-      </p>
-    </CautionBox>
 
     <div class="mt-12 flex justify-end">
       <a href="/classification" class="inline-flex items-center gap-2 text-accent-red font-semibold hover:underline">
