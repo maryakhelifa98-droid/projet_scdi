@@ -33,21 +33,6 @@ import StatCard from "../components/StatCard.astro";
     </div>
   </section>
 
-  <!-- Alerte dataset synthétique -->
-  <section class="mx-auto max-w-6xl px-4 sm:px-6 -mt-8 md:-mt-10 relative z-10">
-    <div class="bg-white border border-accent-red/30 rounded-xl shadow-md px-5 py-4 flex gap-3 items-start">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e63946" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
-        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
-        <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-      </svg>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        <strong class="text-navy-900">Dataset synthétique :</strong> ces données sont simulées à des fins pédagogiques,
-        elles ne représentent pas les vraies statistiques de la Coupe du Monde FIFA 2026.
-        Les résultats sont à lire comme une <strong>illustration méthodologique</strong>. Détails en <a href="/methodologie" class="text-accent-red font-medium underline">page Méthodologie</a>.
-      </p>
-    </div>
-  </section>
-
   <!-- Contexte -->
   <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-20">
     <div class="max-w-3xl">
@@ -58,10 +43,11 @@ import StatCard from "../components/StatCard.astro";
         des joueurs répartis par poste et par confédération.
       </p>
       <p class="text-slate-700 leading-relaxed">
-        L'analyse s'appuie sur trois notebooks Jupyter : un nettoyage et contrôle qualité des données,
-        une analyse descriptive avec tests statistiques, puis une classification du poste des joueurs
-        par régression logistique. L'objectif : répondre à une question simple avec des méthodes rigoureuses,
-        et rester honnête sur les limites du jeu de données.
+        L'analyse a été réalisée à partir de trois notebooks Jupyter. Le premier est consacré au nettoyage
+        et à la vérification des données. Le deuxième présente une analyse descriptive des données ainsi
+        que les différents tests statistiques réalisés. Enfin, le troisième porte sur la classification du
+        poste des joueurs à l'aide d'une régression logistique. L'objectif est d'étudier cette question à
+        partir des données disponibles, tout en prenant en compte leurs limites.
       </p>
     </div>
 
