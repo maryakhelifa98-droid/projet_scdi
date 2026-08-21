@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import StatCard from "../components/StatCard.astro";
-import InterpretationBox from "../components/InterpretationBox.astro";
 import CautionBox from "../components/CautionBox.astro";
 ---
 
@@ -11,9 +10,8 @@ import CautionBox from "../components/CautionBox.astro";
       <p class="text-xs font-semibold tracking-widest uppercase text-accent-teal-light mb-3">Machine learning</p>
       <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Prédire le poste d'un joueur</h1>
       <p class="text-navy-100/90 text-lg leading-relaxed">
-        Peut-on deviner le poste d'un joueur uniquement à partir de ses statistiques de jeu ? Un modèle de
-        régression logistique multinomiale a été entraîné sur 12 statistiques — avec un résultat qui doit
-        surtout nous alerter.
+        Peut-on prédire le poste d'un joueur à partir de ses statistiques de jeu ? Un modèle de régression
+        logistique multinomiale a été entraîné sur 12 statistiques pour répondre à cette question.
       </p>
     </div>
   </section>
@@ -23,7 +21,7 @@ import CautionBox from "../components/CautionBox.astro";
     <h2 id="modele">Le modèle : régression logistique multinomiale</h2>
     <p>
       Le modèle utilise <strong>12 statistiques de jeu</strong> (buts, tirs, passes décisives, tacles,
-      interceptions, minutes jouées…) pour prédire à quel poste appartient un joueur parmi quatre catégories :
+      interceptions, minutes jouées…) pour prédire le poste d'un joueur parmi quatre catégories :
       Gardien, Défenseur, Milieu, Attaquant.
     </p>
 
@@ -32,21 +30,19 @@ import CautionBox from "../components/CautionBox.astro";
       <StatCard value="100 %" label="Accuracy sans gardiens" detail="Le résultat reste identique même en excluant les gardiens" accent="red" />
     </div>
 
-    <CautionBox title="Un score parfait est un signal d'alerte, pas une victoire">
+    <CautionBox title="Un score parfait n'est pas une performance à célébrer">
       <p>
-        Une accuracy de 100 % est <strong>extrêmement rare</strong> en machine learning sur des données réelles.
-        Dans ce projet, ce résultat est présenté comme un <strong>signal d'alerte méthodologique</strong> plutôt
-        qu'une performance à célébrer : il suggère que les statistiques du dataset sont probablement générées
-        de façon trop cohérente avec le poste (peu ou pas de bruit, de contre-exemples ou de polyvalence entre
-        postes), une situation peu réaliste pour de vraies données de football.
+                Ce résultat doit être pris avec prudence. Une classification parfaite est très rare sur des données
+        réelles. Ici, les variables utilisées semblent être fortement liées au poste des joueurs, ce qui rend
+        la classification particulièrement facile. Cela peut aussi indiquer une limite dans la construction
+        du jeu de données.
       </p>
     </CautionBox>
 
     <h2 id="matrice">Une matrice de confusion parfaitement diagonale</h2>
     <p>
       La matrice de confusion compare, pour chaque joueur, le poste réel et le poste prédit par le modèle.
-      Ici, elle est <strong>parfaitement diagonale</strong> : aucune confusion entre postes, ce qui confirme
-      visuellement le score de 100 %.
+      Elle est <strong>parfaitement diagonale</strong> : aucune confusion entre postes.
     </p>
 
     <figure class="my-8">
@@ -56,20 +52,9 @@ import CautionBox from "../components/CautionBox.astro";
       </figcaption>
     </figure>
 
-    <InterpretationBox>
-      <p>
-        Sur la <strong>diagonale</strong> d'une matrice de confusion se trouvent les prédictions correctes
-        (le modèle a prédit le bon poste). Tout ce qui est <strong>hors diagonale</strong> représente une
-        erreur de classification (ex. un défenseur classé comme milieu). Une matrice « parfaitement diagonale »
-        signifie zéro erreur — ce qui, comme expliqué plus haut, doit être interprété avec prudence plutôt
-        qu'admiré sans recul.
-      </p>
-    </InterpretationBox>
-
-    <h2 id="coefficients">Des coefficients qui confirment l'intuition footballistique</h2>
+    <h2 id="coefficients">Des coefficients cohérents avec la logique du jeu</h2>
     <p>
-      Malgré la prudence nécessaire sur le score parfait, les <strong>coefficients du modèle</strong> restent
-      interprétables et cohérents avec la logique du jeu :
+      Les coefficients du modèle restent interprétables :
     </p>
     <ul>
       <li><strong>Tacles, interceptions et dégagements</strong> pèsent fortement en faveur de la classe « Défenseur ».</li>
@@ -83,21 +68,6 @@ import CautionBox from "../components/CautionBox.astro";
         Coefficients du modèle de régression logistique, par poste — plus la barre est longue, plus la variable pèse dans la prédiction.
       </figcaption>
     </figure>
-
-    <p>
-      C'est un point rassurant : même si l'accuracy parfaite doit être questionnée, le modèle n'apprend pas
-      n'importe quoi — il retrouve une structure statistique cohérente avec le rôle réel de chaque poste sur le terrain.
-    </p>
-
-    <InterpretationBox title="Pourquoi douter d'un score parfait ?">
-      <p>
-        En science des données, un modèle qui n'échoue <em>jamais</em> sur des données réelles est suspect :
-        les vraies données de football contiennent presque toujours des cas ambigus (joueurs polyvalents,
-        arrière latéral offensif, milieu défensif proche du profil d'un défenseur…). L'absence totale d'erreur
-        pointe plutôt vers une <strong>simplicité artificielle du dataset</strong> — cohérente avec sa nature
-        synthétique, détaillée en page <a href="/methodologie" class="text-accent-teal underline font-medium">Méthodologie</a>.
-      </p>
-    </InterpretationBox>
 
     <div class="mt-12 flex justify-between flex-wrap gap-4">
       <a href="/etude" class="inline-flex items-center gap-2 text-navy-700 font-semibold hover:underline">
