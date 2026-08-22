@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import StatCard from "../components/StatCard.astro";
 import CautionBox from "../components/CautionBox.astro";
-import InterpretationBox from "../components/InterpretationBox.astro";
 ---
 
 <Layout title="Méthodologie" description="Nettoyage des données, choix méthodologiques et limites du dataset synthétique utilisé pour cette étude.">
@@ -11,8 +10,7 @@ import InterpretationBox from "../components/InterpretationBox.astro";
       <p class="text-xs font-semibold tracking-widest uppercase text-accent-teal-light mb-3">Documentation technique</p>
       <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Méthodologie &amp; limites</h1>
       <p class="text-navy-100/90 text-lg leading-relaxed">
-        Cette page détaille la démarche technique du projet et, surtout, les limites du jeu de données —
-        essentielles pour interpréter correctement les résultats présentés ailleurs sur le site.
+        Démarche technique du projet et limites du jeu de données.
       </p>
     </div>
   </section>
@@ -31,42 +29,22 @@ import InterpretationBox from "../components/InterpretationBox.astro";
       <StatCard value="0" label="Valeur manquante" detail="et 0 doublon détecté" accent="teal" />
     </div>
 
-    <p>
-      Aucune valeur manquante ni aucun doublon n'a été identifié sur l'ensemble du jeu de données — un
-      constat qui, combiné aux autres observations ci-dessous, renforce l'hypothèse d'un jeu de données
-      généré de façon synthétique plutôt que collecté sur le terrain.
-    </p>
-
     <h2 id="limite-majeure">⚠ Limite majeure : un dataset synthétique</h2>
 
     <CautionBox title="À garder en tête sur l'ensemble du site">
       <p>
-        Le dataset utilisé dans cette étude est <strong>synthétique / simulé</strong> — il ne provient pas
-        des vraies statistiques de la Coupe du Monde FIFA 2026. Tous les résultats présentés sur ce site
-        doivent être lus comme une <strong>illustration méthodologique</strong> (démonstration de techniques
-        d'analyse et de modélisation), et non comme une analyse de la véritable compétition.
+        Le dataset utilisé est <strong>synthétique / simulé</strong> — il ne provient pas des vraies
+        statistiques de la Coupe du Monde FIFA 2026. Les résultats présentés sur ce site sont à lire comme
+        une <strong>illustration méthodologique</strong>, pas comme une analyse de la véritable compétition.
       </p>
     </CautionBox>
 
-    <p>Deux incohérences factuelles confirment cette nature synthétique :</p>
+    <p>Deux incohérences confirment cette nature synthétique :</p>
 
     <div class="grid sm:grid-cols-2 gap-4 my-6">
       <StatCard value="1 050" label="Matchs recensés dans le dataset" detail="Contre 104 matchs dans un vrai Mondial à 48 équipes" accent="red" />
       <StatCard value="≈ 23 %" label="Save percentage moyen des gardiens" detail="Très en dessous des standards réels (65-75 %)" accent="red" />
     </div>
-
-    <InterpretationBox title="Pourquoi c'est important">
-      <p>
-        Un vrai Mondial à 48 équipes compte 104 matchs au total (phase de groupes + élimination directe).
-        Le dataset en recense <strong>1 050</strong> — un ordre de grandeur incompatible avec un vrai
-        tournoi. De même, un pourcentage d'arrêts moyen de <strong>23 %</strong> est très inférieur aux
-        standards professionnels (65-75 %). Ces écarts ne sont pas des erreurs à corriger : ils sont la
-        preuve que le calendrier et les statistiques ont été générés de façon simulée, et non extraits
-        d'une compétition réelle. C'est pourquoi la prudence s'impose dans l'interprétation de chaque
-        résultat, y compris l'accuracy de 100 % du modèle de classification (voir la
-        page <a href="/classification" class="text-accent-teal underline font-medium">Classification</a>).
-      </p>
-    </InterpretationBox>
 
     <h2 id="notebooks">Les trois notebooks du projet</h2>
     <ul>
@@ -87,11 +65,9 @@ import InterpretationBox from "../components/InterpretationBox.astro";
 
     <h2 id="confederations">Table de correspondance nationalité → confédération</h2>
     <p>
-      Chaque joueur a été rattaché à une confédération FIFA à partir de sa nationalité, via une table de
-      correspondance nationalité → confédération. Sur les 6 confédérations FIFA existantes, <strong>5 sont
-      effectivement représentées</strong> dans ce dataset (UEFA, CAF, AFC, CONMEBOL, CONCACAF) — aucune
-      nationalité associée à l'OFC (Océanie) n'y figure. Ce rattachement suit les règles d'affiliation
-      sportive officielles, qui ne correspondent pas toujours à la zone géographique intuitive.
+      Chaque joueur a été rattaché à une confédération FIFA à partir de sa nationalité. Sur les 6
+      confédérations FIFA existantes, <strong>5 sont représentées</strong> dans ce dataset (UEFA, CAF, AFC,
+      CONMEBOL, CONCACAF) — aucune nationalité associée à l'OFC (Océanie) n'y figure.
     </p>
 
     <div class="overflow-x-auto my-6 rounded-lg border border-slate-200">
@@ -107,15 +83,11 @@ import InterpretationBox from "../components/InterpretationBox.astro";
           <tr>
             <td class="px-4 py-3 font-medium text-navy-900">Australie</td>
             <td class="px-4 py-3">AFC (Asie)</td>
-            <td class="px-4 py-3 text-slate-500">Choix méthodologique : l'Australie a rejoint l'AFC en 2006, malgré sa position géographique en Océanie.</td>
+            <td class="px-4 py-3 text-slate-500">L'Australie a rejoint l'AFC en 2006, malgré sa position géographique en Océanie.</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="text-sm text-slate-500">
-      Ce cas illustre pourquoi le rattachement pays → confédération suit les <strong>affiliations
-      sportives officielles</strong> (sous l'égide de la FIFA) plutôt qu'un simple découpage géographique.
-    </p>
 
     <h2 id="outils">Outils et bibliothèques</h2>
     <ul>
